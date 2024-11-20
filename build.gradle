@@ -1,0 +1,61 @@
+buildscript {
+    apply from: 'versions.gradle'
+    apply plugin: 'maven-publish'
+
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+
+    dependencies {
+        classpath "com.android.tools.build:gradle:8.7.2"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0"
+    }
+}
+
+plugins {
+    id "com.github.spotbugs" version "2.0.0" apply(false)
+}
+
+project.extensions.extraProperties.set('SpotBugsTask', com.github.spotbugs.SpotBugsTask)
+
+allprojects {
+    repositories {
+        mavenLocal()
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+}
+
+//publishing {
+//    publications {
+//        release(MavenPublication) {
+//            from components.release // or "from components.debug" for debug builds
+//
+//            groupId = 'com.example' // Replace with your group ID
+//            artifactId = 'my-library' // Replace with your library name
+//            version = '1.0.0' // Replace with your version number
+//        }
+//    }
+//
+//    repositories {
+//        maven {
+//            url = uri("https://your.maven.repo.url") // Replace with your repository URL
+//            credentials {
+//                username = project.findProperty("mavenUsername") ?: ""
+//                password = project.findProperty("mavenPassword") ?: ""
+//            }
+//        }
+//    }
+//}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
