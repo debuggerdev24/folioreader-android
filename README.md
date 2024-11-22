@@ -19,3 +19,10 @@ Add the following dependency to your project's `build.gradle` file:
 dependencies {
     implementation 'io.github.debuggerdev24:folioreader:0.0.7'
 }
+
+<dependency>
+  <groupId>io.github.debuggerdev24</groupId>
+  <artifactId>folioreader</artifactId>
+  <version>0.0.7</version>
+</dependency>
+
