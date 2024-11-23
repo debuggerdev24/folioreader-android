@@ -14,7 +14,7 @@ import org.readium.r2.shared.LocatorText
 
 @JsonPropertyOrder("bookId", "href", "created", "locations")
 @JsonIgnoreProperties(ignoreUnknown = true)
-open class ReadLocator : Locator, Parcelable {
+public class ReadLocator : Locator, Parcelable {
 
     var bookId: String
 
