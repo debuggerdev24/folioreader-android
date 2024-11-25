@@ -31,12 +31,14 @@ ext {
 
 android {
     namespace "com.folioreader"
-    compileSdkVersion 34
+    compileSdk 34
+//    compileSdkVersion 34
 //    useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         minSdkVersion 24
-        targetSdkVersion 34
+//        targetSdkVersion 34
+        targetSdk 34
         versionCode versions.projectVersionCode
         versionName versions.projectVersionName
         vectorDrawables.useSupportLibrary = true
@@ -77,11 +79,11 @@ android {
         ignoreFailures = true
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
     viewBinding {
         enabled = true

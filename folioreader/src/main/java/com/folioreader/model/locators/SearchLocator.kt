@@ -1,7 +1,9 @@
 package com.folioreader.model.locators
 
+import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
+import androidx.annotation.RequiresApi
 import org.readium.r2.shared.Locations
 import org.readium.r2.shared.Locator
 import org.readium.r2.shared.LocatorText
@@ -26,13 +28,14 @@ class SearchLocator : Locator, Parcelable {
         this.searchItemType = searchItemType
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     constructor(parcel: Parcel) : this(
         Locator(
             parcel.readString()!!,
             parcel.readLong(),
             parcel.readString()!!,
-            parcel.readSerializable() as Locations,
-            parcel.readSerializable() as LocatorText?
+            parcel.readSerializable(Locations::class.java.classLoader, Locations::class.java) as Locations,
+            parcel.readSerializable(LocatorText::class.java.classLoader, LocatorText::class.java)
         ), parcel.readString()!!, SearchItemType.valueOf(parcel.readString()!!)
     )
 
@@ -54,6 +57,7 @@ class SearchLocator : Locator, Parcelable {
 
         @JvmField
         val CREATOR = object : Parcelable.Creator<SearchLocator> {
+            @RequiresApi(Build.VERSION_CODES.TIRAMISU)
             override fun createFromParcel(parcel: Parcel): SearchLocator {
                 return SearchLocator(parcel)
             }
