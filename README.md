@@ -31,7 +31,7 @@ Add the Folioreader dependency in your module-level build.gradle file:
        implementation 'com.github.debuggerdev24:folioreader-android:v0.1.7'
    }
 
-Maven (Alternative)
+## Maven (Alternative)
 1. Add JitPack Repository
 Add the following repository to your pom.xml:
 <repositories>
