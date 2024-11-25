@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.github.debuggerdev24</groupId> <!-- Replace with your Group ID -->
+    <artifactId>folioreader</artifactId> <!-- Replace with your Artifact ID -->
+    <version>0.1.6</version> <!-- Set your version -->
+    <packaging>jar</packaging> <!-- or 'aar' for Android libraries -->
+
+    <dependencies>
+        <!-- Add any dependencies you need here -->
+    </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/debuggerdev24/folioreader-android</url> <!-- Replace with your repository URL -->
+        </repository>
+    </distributionManagement>
+
+    <scm>
+        <url>https://github.com/debuggerdev24/folioreader-android</url> <!-- Replace with your repository URL -->
+        <connection>scm:git:git://github.com/debuggerdev24/folioreader-android.git</connection>
+    </scm>
+</project>
