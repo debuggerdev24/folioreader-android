@@ -26,8 +26,8 @@ Folioreader is an open-source Android library designed to provide seamless EPUB 
 
 2. **Add the Dependency**  
 Add the Folioreader dependency in your module-level build.gradle file:
-
-   ```dependencies {
+   ```gradle
+   dependencies {
        implementation 'com.github.debuggerdev24:folioreader-android:v0.1.7'
    }
 
