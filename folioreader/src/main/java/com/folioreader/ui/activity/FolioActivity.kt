@@ -543,7 +543,7 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
 
         val intent = Intent(this@FolioActivity, ContentHighlightActivity::class.java)
 
-        intent.putExtra(Constants.PUBLICATION, pubBox!!.publication)
+        intent.putExtra(PUBLICATION, pubBox!!.publication)
         try {
             intent.putExtra(CHAPTER_SELECTED, spine!![currentChapterIndex].href)
         } catch (e: NullPointerException) {
@@ -1186,11 +1186,9 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
     }
 
     private fun clearSearchLocator() {
-        Log.v(LOG_TAG, "-> clearSearchLocator")
-
         val fragments = mFolioPageFragmentAdapter!!.fragments
         for (i in fragments.indices) {
-            val folioPageFragment = fragments[i] as FolioPageFragment?
+            val folioPageFragment = fragments[i]
             folioPageFragment?.clearSearchLocator()
         }
 
@@ -1203,5 +1201,4 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
             }
         }
     }
-
 }

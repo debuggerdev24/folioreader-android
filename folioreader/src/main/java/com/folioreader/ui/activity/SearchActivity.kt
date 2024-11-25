@@ -262,8 +262,9 @@ class SearchActivity : AppCompatActivity(), OnItemClickListener {
 
             override fun onMenuItemActionCollapse(p0: MenuItem): Boolean {
                 Log.v(LOG_TAG, "-> onMenuItemActionCollapse")
-                navigateBack()
-                return false
+//                navigateBack()
+//                return false
+                return true
             }
         })
 
