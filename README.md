@@ -24,9 +24,10 @@ Folioreader is an open-source Android library designed to provide seamless EPUB 
        }
    }
 
-Add the Dependency
+2. **Add the Dependency**  
 Add the Folioreader dependency in your module-level build.gradle file:
-dependencies {
+
+```dependencies {
     implementation 'com.github.debuggerdev24:folioreader-android:v0.1.7'
 }
 
@@ -39,6 +40,7 @@ Add the following repository to your pom.xml:
         <url>https://jitpack.io</url>
     </repository>
 </repositories>
+
 2. Add the Dependency
 Include the dependency in your pom.xml file:
 <dependency>
