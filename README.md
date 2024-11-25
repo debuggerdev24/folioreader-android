@@ -32,27 +32,30 @@ Add the Folioreader dependency in your module-level build.gradle file:
    }
 
 ## Maven (Alternative)
-1. Add JitPack Repository
+1. **Add JitPack Repository**
 Add the following repository to your pom.xml:
-<repositories>
-    <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    </repository>
-</repositories>
+   ```gradle
+   <repositories>
+       <repository>
+           <id>jitpack.io</id>
+           <url>https://jitpack.io</url>
+       </repository>
+   </repositories>
 
-2. Add the Dependency
+2. **Add the Dependency**
 Include the dependency in your pom.xml file:
-<dependency>
-    <groupId>com.github.debuggerdev24</groupId>
-    <artifactId>folioreader-android</artifactId>
-    <version>v0.1.7</version>
-</dependency>
 
-Key Features
-Handle Table of Contents: Allows navigation through chapters.
-Theme Configuration: Toggle between Light and Dark themes.
-EPUB Asset Support: Load EPUB files from assets or external sources.
+   ```gradle
+   <dependency>
+       <groupId>com.github.debuggerdev24</groupId>
+       <artifactId>folioreader-android</artifactId>
+       <version>v0.1.7</version>
+   </dependency>
+
+### Key Features:
+- Handle Table of Contents: Allows navigation through chapters.
+- Theme Configuration: Toggle between Light and Dark themes.
+- EPUB Asset Support: Load EPUB files from assets or external sources.
 
 
 
