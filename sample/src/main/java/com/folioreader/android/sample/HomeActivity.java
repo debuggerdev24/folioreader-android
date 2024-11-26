@@ -17,10 +17,11 @@ package com.folioreader.android.sample;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.folioreader.Config;
@@ -33,6 +34,8 @@ import com.folioreader.util.OnHighlightListener;
 import com.folioreader.util.ReadLocatorListener;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -57,36 +60,88 @@ public class HomeActivity extends AppCompatActivity
 
         getHighlightsAndSave();
 
-        findViewById(R.id.btn_raw).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        findViewById(R.id.btn_raw).setOnClickListener(v -> {
+            Config config = AppUtil.getSavedConfig(getApplicationContext());
+            if (config == null) {
+                config = new Config();
+            }
 
-                Config config = AppUtil.getSavedConfig(getApplicationContext());
-                if (config == null)
-                    config = new Config();
-                config.setAllowedDirection(Config.AllowedDirection.VERTICAL_AND_HORIZONTAL);
+            File bookFile = copyRawResourceToFile(R.raw.test_semple, "test_sample.epub");
+//            config.setAllowedDirection(Config.AllowedDirection.VERTICAL_AND_HORIZONTAL);
+//
+//            folioReader.setConfig(config, true)
+//                    .openBook(R.raw.test_semple);
 
+            if (bookFile != null) {
                 folioReader.setConfig(config, true)
-                        .openBook(R.raw.accessible_epub_3);
+                        .openBook(bookFile.getAbsolutePath());
+            } else {
+                Toast.makeText(getApplicationContext(), "Failed to load book", Toast.LENGTH_SHORT).show();
             }
         });
 
-        findViewById(R.id.btn_assest).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        findViewById(R.id.btn_assest).setOnClickListener(v -> {
 
-                ReadLocator readLocator = getLastReadLocator();
+            ReadLocator readLocator = getLastReadLocator();
 
-                Config config = AppUtil.getSavedConfig(getApplicationContext());
-                if (config == null)
-                    config = new Config();
-                config.setAllowedDirection(Config.AllowedDirection.VERTICAL_AND_HORIZONTAL);
+            Config config = AppUtil.getSavedConfig(getApplicationContext());
+            if (config == null) {
+                config = new Config();
+            }
 
+            File bookFile = copyAssetToFile("TheSilverChair.epub");
+
+            if (bookFile != null) {
                 folioReader.setReadLocator(readLocator);
                 folioReader.setConfig(config, true)
-                        .openBook("file:///android_asset/TheSilverChair.epub");
+                        .openBook(bookFile.getAbsolutePath());
+            } else {
+                Toast.makeText(getApplicationContext(), "Failed to load book", Toast.LENGTH_SHORT).show();
             }
+//            config.setAllowedDirection(Config.AllowedDirection.VERTICAL_AND_HORIZONTAL);
+//
+//            folioReader.setReadLocator(readLocator);
+//            folioReader.setConfig(config, true)
+//                    .openBook("file:///android_asset/TheSilverChair.epub");
         });
+    }
+
+    private File copyAssetToFile(String assetName) {
+        try {
+            File outputFile = new File(getFilesDir(), assetName);
+            if (!outputFile.exists()) {
+                try (InputStream inputStream = getAssets().open(assetName);
+                     FileOutputStream outputStream = new FileOutputStream(outputFile)) {
+                    byte[] buffer = new byte[1024];
+                    int length;
+                    while ((length = inputStream.read(buffer)) > 0) {
+                        outputStream.write(buffer, 0, length);
+                    }
+                }
+            }
+            return outputFile;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+//            return null;
+        }
+    }
+
+    private File copyRawResourceToFile(int resourceId, String fileName) {
+        try {
+            File outputFile = new File(getFilesDir(), fileName);
+            try (InputStream inputStream = getResources().openRawResource(resourceId);
+                 FileOutputStream outputStream = new FileOutputStream(outputFile)) {
+                byte[] buffer = new byte[1024];
+                int length;
+                while ((length = inputStream.read(buffer)) > 0) {
+                    outputStream.write(buffer, 0, length);
+                }
+            }
+            return outputFile;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+//            return null;
+        }
     }
 
     private ReadLocator getLastReadLocator() {
